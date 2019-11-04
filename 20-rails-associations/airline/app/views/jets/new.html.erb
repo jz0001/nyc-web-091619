@@ -1,0 +1,26 @@
+<h1>✈️ Go ahead. Make ya jets!! ✈️</h1>
+
+<% if @jet.errors.any? %>
+  <h4>errors</h4>
+  <ul>
+    <% @jet.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end%>
+  </ul>
+<% end %>
+
+<%= form_with model: @jet, local: true do |f| %>
+  <%= f.label :model %>
+  <%= f.text_field :model %>
+  <br>
+  <%= f.label :range %>
+  <%= f.number_field :range %>  
+  <br>
+  <%= f.label :seats %>
+  <%= f.number_field :seats %>
+  <br>
+  
+  <%= f.collection_select :jet_company_id, @jet_companies, :id, :fancy_name, prompt: true  %>
+
+  <%= f.submit %>
+<% end %>

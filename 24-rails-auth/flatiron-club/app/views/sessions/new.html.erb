@@ -1,0 +1,17 @@
+<h1>👯‍♂️ Please Login to da club! ⽕ (<- for Jeff)</h1>
+
+<% if flash[:errors]%>
+  <% flash[:errors].each do |message| %>
+    <strong><%= message %></strong>
+  <% end%>
+<% end%>
+
+<%= form_tag sessions_path do  %>
+  <%= label_tag 'Username' %>
+  <%= text_field_tag :username %>
+  <br>
+  <%= label_tag "Password" %>
+  <%= password_field_tag :password %>
+  <br>
+  <%= submit_tag 'Log In! 🎉' %>
+<% end %>

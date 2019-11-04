@@ -1,0 +1,2 @@
+module JetCompaniesHelper
+end

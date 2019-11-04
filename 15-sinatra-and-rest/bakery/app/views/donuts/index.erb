@@ -1,0 +1,9 @@
+<h2>Hello Donuts!</h2>
+
+<ul>
+  <% @donuts.each do |donut| %>
+    <li>
+      Flavor: <%= donut.flavor %>, Price: $<%= donut.price %>
+    </li>
+  <% end%>
+</ul>

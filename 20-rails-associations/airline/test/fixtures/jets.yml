@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  model: MyString
+  seats: 1
+  range: 1
+  jet_company: one
+
+two:
+  model: MyString
+  seats: 1
+  range: 1
+  jet_company: two

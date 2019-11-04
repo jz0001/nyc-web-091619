@@ -1,0 +1,9 @@
+<h1>🐶 Yo dawg. What's good? 🐶</h1>
+
+<% @dogs.each do |dog| %>
+  <div>
+    <h3><%= dog.name %></h3>
+    <p><strong><%= dog.breed %></strong></p>
+    <p>Yo. This dog is <%= dog.age %> year(s) old.</p>
+  </div>
+<% end %>

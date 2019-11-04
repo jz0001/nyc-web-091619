@@ -1,0 +1,24 @@
+<h2>Make a New Donut!!</h2>
+
+<% if @error_messages.present? %>
+  <% @error_messages.each do |message| %>
+    <h3 style="color:red;">YOU CRAY!!! <%= message %></h3>
+  <% end%>
+<% end%>
+
+<form action="/donuts" method="post">
+  <label>Flavor: </label><input type="text" name="flavor">
+  <label>Price: </label><input type="number" name="price" step="0.01" min="0">
+
+  <label>Designer: </label>
+  <select name="designer_id">
+    <option value="" disabled selected>Select your option</option>
+  <% @designers.each do |designer| %>
+    <option value="<%= designer.id %>">
+      <%= designer.name %>
+    </option>
+  <% end %>
+  </select>
+
+  <input type="submit">
+</form>

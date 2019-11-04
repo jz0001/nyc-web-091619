@@ -1,0 +1,15 @@
+<h2>Edit Dat Donut!!</h2>
+
+<% if @error_messages.present? %>
+  <% @error_messages.each do |message| %>
+    <h3 style="color:red;">YOU CRAY!!! <%= message %></h3>
+  <% end%>
+<% end%>
+
+<form action="/donuts/<%= @donut.id %>" method="POST">
+  <input type="hidden" name="_method" value="PATCH">
+  <label>Flavor: </label><input type="text" name="flavor" value="<%= @donut.flavor %>">
+  <label>Price: </label><input type="number" name="price" step="0.01" min="0" value="<%= @donut.price %>">
+   
+  <input type="submit">
+</form>

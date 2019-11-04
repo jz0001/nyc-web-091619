@@ -1,0 +1,1543 @@
+Started GET "/jets/new" for ::1 at 2019-10-15 14:55:26 -0400
+  [1m[35m (21.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+        rails db:migrate RAILS_ENV=development
+
+):
+  
+activerecord (6.0.0) lib/active_record/migration.rb:587:in `check_pending!'
+activerecord (6.0.0) lib/active_record/migration.rb:564:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateJetCompanies (20191015184536)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "jet_companies" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191015184536"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateJets (20191015184922)
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "jets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "model" varchar, "seats" integer, "range" integer, "jet_company_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_0084c86862"
+FOREIGN KEY ("jet_company_id")
+  REFERENCES "jet_companies" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_jets_on_jet_company_id" ON "jets" ("jet_company_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191015184922"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-15 18:56:16.597499"], ["updated_at", "2019-10-15 18:56:16.597499"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/jets/new" for ::1 at 2019-10-15 14:56:25 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+AbstractController::ActionNotFound (The action 'new' could not be found for JetsController):
+  
+actionpack (6.0.0) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/jets/new" for ::1 at 2019-10-15 14:56:38 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+Completed 406 Not Acceptable in 6ms (ActiveRecord: 0.0ms | Allocations: 2197)
+
+
+  
+ActionController::MissingExactTemplate (JetsController#new is missing a template for request formats: text/html):
+  
+actionpack (6.0.0) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (6.0.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (6.0.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (6.0.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.0.0) lib/abstract_controller/base.rb:196:in `process_action'
+actionpack (6.0.0) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.0.0) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.0.0) lib/active_support/callbacks.rb:135:in `run_callbacks'
+actionpack (6.0.0) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.0.0) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.0.0) lib/action_controller/metal/instrumentation.rb:33:in `block in process_action'
+activesupport (6.0.0) lib/active_support/notifications.rb:180:in `block in instrument'
+activesupport (6.0.0) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.0.0) lib/active_support/notifications.rb:180:in `instrument'
+actionpack (6.0.0) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (6.0.0) lib/action_controller/metal/params_wrapper.rb:245:in `process_action'
+activerecord (6.0.0) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.0.0) lib/abstract_controller/base.rb:136:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/jets/new" for ::1 at 2019-10-15 14:57:08 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 88)
+[Webpacker] Compiling…
+[Webpacker] Compiled all packs in /Users/sdoran/Development/code/batches/nyc-web-091619/20-rails-associations/airline/public/packs
+Completed 200 OK in 3357ms (Views: 3354.7ms | ActiveRecord: 0.0ms | Allocations: 1355692)
+
+
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.5ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Delta"], ["created_at", "2019-10-15 18:57:48.075328"], ["updated_at", "2019-10-15 18:57:48.075328"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mJetCompany Load (0.4ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mJetCompany Load (0.3ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" ORDER BY "jet_companies"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJet Create (0.4ms)[0m  [1m[32mINSERT INTO "jets" ("model", "seats", "range", "jet_company_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["model", "777"], ["seats", 35], ["range", 50], ["jet_company_id", 1], ["created_at", "2019-10-15 19:00:08.962774"], ["updated_at", "2019-10-15 19:00:08.962774"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mJet Load (0.2ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."jet_company_id" = ? LIMIT ?[0m  [["jet_company_id", 1], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJet Create (0.7ms)[0m  [1m[32mINSERT INTO "jets" ("model", "seats", "range", "jet_company_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["model", "767"], ["seats", 12], ["range", 40], ["jet_company_id", 1], ["created_at", "2019-10-15 19:01:41.039702"], ["updated_at", "2019-10-15 19:01:41.039702"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mJet Load (0.3ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."jet_company_id" = ? LIMIT ?[0m  [["jet_company_id", 1], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (1.6ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mJet Load (0.2ms)[0m  [1m[34mSELECT "jets".* FROM "jets"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJet Destroy (0.3ms)[0m  [1m[31mDELETE FROM "jets" WHERE "jets"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJet Destroy (0.2ms)[0m  [1m[31mDELETE FROM "jets" WHERE "jets"."id" = ?[0m  [["id", 2]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mJetCompany Load (0.3ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" ORDER BY "jet_companies"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mJetCompany Load (0.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" ORDER BY "jet_companies"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.4ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mJet Load (0.3ms)[0m  [1m[34mSELECT "jets".* FROM "jets" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mJetCompany Load (0.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.4ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Delta"], ["created_at", "2019-10-15 19:08:15.576913"], ["updated_at", "2019-10-15 19:08:15.576913"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.4ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "American"], ["created_at", "2019-10-15 19:08:15.579822"], ["updated_at", "2019-10-15 19:08:15.579822"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.4ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Aer Lingus"], ["created_at", "2019-10-15 19:08:15.582737"], ["updated_at", "2019-10-15 19:08:15.582737"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.3ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Aeroflot"], ["created_at", "2019-10-15 19:08:15.585493"], ["updated_at", "2019-10-15 19:08:15.585493"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.3ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Cathay Pacific"], ["created_at", "2019-10-15 19:08:15.587898"], ["updated_at", "2019-10-15 19:08:15.587898"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mJetCompany Load (0.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.4ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 2]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.2ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 3]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.6ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 4]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.2ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 5]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.2ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 6]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.3ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Delta"], ["created_at", "2019-10-15 19:09:05.884877"], ["updated_at", "2019-10-15 19:09:05.884877"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.2ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "American"], ["created_at", "2019-10-15 19:09:05.887541"], ["updated_at", "2019-10-15 19:09:05.887541"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.2ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Aer Lingus"], ["created_at", "2019-10-15 19:09:05.889662"], ["updated_at", "2019-10-15 19:09:05.889662"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.2ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Aeroflot"], ["created_at", "2019-10-15 19:09:05.891894"], ["updated_at", "2019-10-15 19:09:05.891894"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.2ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Cathay Pacific"], ["created_at", "2019-10-15 19:09:05.894440"], ["updated_at", "2019-10-15 19:09:05.894440"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mJetCompany Load (0.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.5ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 7]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.3ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 8]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.3ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 9]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.3ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 10]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Destroy (0.3ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 11]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.4ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Delta"], ["created_at", "2019-10-15 19:09:18.091347"], ["updated_at", "2019-10-15 19:09:18.091347"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.3ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "American"], ["created_at", "2019-10-15 19:09:18.095405"], ["updated_at", "2019-10-15 19:09:18.095405"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.4ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Aer Lingus"], ["created_at", "2019-10-15 19:09:18.098721"], ["updated_at", "2019-10-15 19:09:18.098721"]]
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.3ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Aeroflot"], ["created_at", "2019-10-15 19:09:18.103017"], ["updated_at", "2019-10-15 19:09:18.103017"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJetCompany Create (0.3ms)[0m  [1m[32mINSERT INTO "jet_companies" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Cathay Pacific"], ["created_at", "2019-10-15 19:09:18.106475"], ["updated_at", "2019-10-15 19:09:18.106475"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/jets/new" for ::1 at 2019-10-15 15:15:08 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 15.4ms | Allocations: 7868)
+Completed 200 OK in 25ms (Views: 24.0ms | ActiveRecord: 0.0ms | Allocations: 14753)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:19:59 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 2.1ms | Allocations: 4094)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 5460)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil:NilClass):
+    11:   <%= f.number_field :seat %>
+    12:   <br>
+    13:   <select name="jet[jet_company_id]">
+    14:     <% @jet_companies.each do |company| %>
+    15:       <option value="<%= company.id %>">
+    16:         <%= company.name %>
+    17:       </option>
+  
+app/views/jets/new.html.erb:14
+app/views/jets/new.html.erb:3
+Started GET "/jets/new" for ::1 at 2019-10-15 15:20:27 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 6.0ms | Allocations: 4355)
+Completed 200 OK in 20ms (Views: 11.6ms | ActiveRecord: 1.0ms | Allocations: 17282)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 15:21:55 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"99jucklNjtO1wTBD2GDyt91FgBsLmTZ5rFqoF9k/tR/Z0paeIzGJbbJPsAb3F6ZnM0cyF3jRyGNqMXGjh6FvLg==", "jet"=>{"model"=>"Airbus 380", "range"=>"50", "seat"=>"50", "jet_company_id"=>"15"}, "commit"=>"Create Jet"}
+Completed 500 Internal Server Error in 117416ms (ActiveRecord: 0.6ms | Allocations: 68333)
+
+
+  
+SystemExit (exit):
+  
+(byebug):1:in `exit'
+(byebug):1:in `create'
+app/controllers/jets_controller.rb:10:in `create'
+Started POST "/jets" for ::1 at 2019-10-15 15:25:29 -0400
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"99jucklNjtO1wTBD2GDyt91FgBsLmTZ5rFqoF9k/tR/Z0paeIzGJbbJPsAb3F6ZnM0cyF3jRyGNqMXGjh6FvLg==", "jet"=>{"model"=>"Airbus 380", "range"=>"50", "seat"=>"50", "jet_company_id"=>"15"}, "commit"=>"Create Jet"}
+[31mUnpermitted parameter: :seat[0m
+Completed 500 Internal Server Error in 38093ms (ActiveRecord: 0.0ms | Allocations: 187043)
+
+
+  
+SystemExit (exit):
+  
+(byebug):1:in `exit'
+(byebug):1:in `create'
+app/controllers/jets_controller.rb:10:in `create'
+Started GET "/jets/new" for ::1 at 2019-10-15 15:26:12 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 123.7ms | Allocations: 1531203)
+Completed 200 OK in 480ms (Views: 226.9ms | ActiveRecord: 21.2ms | Allocations: 5991248)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 15:26:17 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"RexMJDnlxnyAzHVlXEA6LViMNbws2NhgCEcz71aELjxr5jTIU5nBwodC9SBzN279to6HsF+QJnrOLOpbCBr0DQ==", "jet"=>{"model"=>"Airbus 380", "range"=>"40", "seats"=>"49", "jet_company_id"=>"12"}, "commit"=>"Create Jet"}
+Completed 500 Internal Server Error in 66571ms (ActiveRecord: 0.0ms | Allocations: 269151)
+
+
+  
+SystemExit (exit):
+  
+(byebug):1:in `exit'
+(byebug):1:in `create'
+app/controllers/jets_controller.rb:10:in `create'
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mJet Load (0.1ms)[0m  [1m[34mSELECT "jets".* FROM "jets" ORDER BY "jets"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+Started GET "/jets/new" for ::1 at 2019-10-15 15:27:40 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.3ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 61.5ms | Allocations: 825521)
+Completed 200 OK in 182ms (Views: 160.4ms | ActiveRecord: 1.3ms | Allocations: 2383548)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:29:28 -0400
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 121.6ms | Allocations: 1585632)
+Completed 200 OK in 371ms (Views: 219.4ms | ActiveRecord: 20.7ms | Allocations: 4791619)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:29:36 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 62.2ms | Allocations: 824632)
+Completed 200 OK in 185ms (Views: 167.4ms | ActiveRecord: 1.0ms | Allocations: 2383525)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:29:38 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.9ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 70.2ms | Allocations: 881559)
+Completed 200 OK in 207ms (Views: 188.2ms | ActiveRecord: 0.9ms | Allocations: 2633312)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 15:29:52 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"Mi7UrtBgNlQzqFTtHPDMPUqgCJHtsnb8NjQP9rVUHTIcJKxCuhwx6jQm1Kgzh5jtpKK6nZ76iObwX9ZC68rHAw==", "jet"=>{"model"=>"Boeing 777", "range"=>"341", "seats"=>"124", "jet_company_id"=>"16"}, "commit"=>"Create Jet"}
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (1.4ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Create (1.4ms)[0m  [1m[32mINSERT INTO "jets" ("model", "seats", "range", "jet_company_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["model", "Boeing 777"], ["seats", 124], ["range", 341], ["jet_company_id", 16], ["created_at", "2019-10-15 19:29:52.761842"], ["updated_at", "2019-10-15 19:29:52.761842"]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+Redirected to http://localhost:3000/jets/3
+Completed 200 OK in 161ms (ActiveRecord: 4.5ms | Allocations: 1930292)
+
+
+Started GET "/jets/3" for ::1 at 2019-10-15 15:29:52 -0400
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for JetsController):
+  
+actionpack (6.0.0) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started PUT "/__web_console/repl_sessions/3ba2b2dc7051db42aef335aa8e114931" for ::1 at 2019-10-15 15:30:28 -0400
+Started PUT "/__web_console/repl_sessions/3ba2b2dc7051db42aef335aa8e114931" for ::1 at 2019-10-15 15:30:28 -0400
+Started PUT "/__web_console/repl_sessions/3ba2b2dc7051db42aef335aa8e114931" for ::1 at 2019-10-15 15:30:29 -0400
+  [1m[36mJet Load (6.0ms)[0m  [1m[34mSELECT "jets".* FROM "jets" ORDER BY "jets"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+Started GET "/jets/3" for ::1 at 2019-10-15 15:32:12 -0400
+Processing by JetsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering jets/show.html.erb within layouts/application
+  Rendered jets/show.html.erb within layouts/application (Duration: 99.1ms | Allocations: 1328770)
+Completed 500 Internal Server Error in 138ms (ActiveRecord: 0.0ms | Allocations: 1832469)
+
+
+  
+ActionView::Template::Error (undefined method `model' for nil:NilClass):
+    1: <h1>Here's ya jet</h1>
+    2: 
+    3: <h3>Model: <%= @jet.model %></h3>
+    4: <h3>Range: <%= @jet.range %></h3>
+    5: <h3>Seats: <%= @jet.seats %></h3>
+  
+app/views/jets/show.html.erb:3
+Started GET "/jets/3" for ::1 at 2019-10-15 15:32:37 -0400
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mJet Load (1.1ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:19:in `show'
+  Rendering jets/show.html.erb within layouts/application
+  Rendered jets/show.html.erb within layouts/application (Duration: 1.0ms | Allocations: 24695)
+Completed 200 OK in 292ms (Views: 130.3ms | ActiveRecord: 12.2ms | Allocations: 3477269)
+
+
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mJetCompany Load (0.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" ORDER BY "jet_companies"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mJet Load (0.1ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."jet_company_id" = ? LIMIT ?[0m  [["jet_company_id", 12], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJet Create (0.5ms)[0m  [1m[32mINSERT INTO "jets" ("model", "seats", "range", "jet_company_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["model", "thing"], ["seats", 12], ["range", 12], ["jet_company_id", 12], ["created_at", "2019-10-15 19:34:29.731792"], ["updated_at", "2019-10-15 19:34:29.731792"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mJet Load (0.1ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."jet_company_id" = ? LIMIT ?[0m  [["jet_company_id", 12], ["LIMIT", 11]]
+  [1m[36mJet Load (0.2ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."jet_company_id" = ? LIMIT ?[0m  [["jet_company_id", 12], ["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mJet Load (0.3ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."jet_company_id" = ?[0m  [["jet_company_id", 12]]
+  [1m[36mJet Destroy (0.5ms)[0m  [1m[31mDELETE FROM "jets" WHERE "jets"."id" = ?[0m  [["id", 4]]
+  [1m[36mJetCompany Destroy (0.2ms)[0m  [1m[31mDELETE FROM "jet_companies" WHERE "jet_companies"."id" = ?[0m  [["id", 12]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mJet Load (0.6ms)[0m  [1m[34mSELECT "jets".* FROM "jets" ORDER BY "jets"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+Started GET "/jets/3" for ::1 at 2019-10-15 15:40:18 -0400
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mJet Load (1.2ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:19:in `show'
+  Rendering jets/show.html.erb within layouts/application
+  Rendered jets/show.html.erb within layouts/application (Duration: 2.6ms | Allocations: 53040)
+Completed 200 OK in 282ms (Views: 133.4ms | ActiveRecord: 1.2ms | Allocations: 3593483)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:40:22 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.3ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 145.2ms | Allocations: 1903055)
+Completed 200 OK in 299ms (Views: 240.4ms | ActiveRecord: 10.7ms | Allocations: 3983874)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 15:40:35 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"U4VQZkF7UTnalINdI1+te7GyrPd8sEngxmw/S/GNQ719jyiKKwdWh90aAxgMKPmrX7Ae+w/4t/oAB+b/rxOZjA==", "jet"=>{"model"=>"Airbus 380", "range"=>"325", "seats"=>"15", "jet_company_id"=>"13"}, "commit"=>"Create Jet"}
+  [1m[35m (0.7ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Create (1.4ms)[0m  [1m[32mINSERT INTO "jets" ("model", "seats", "range", "jet_company_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["model", "Airbus 380"], ["seats", 15], ["range", 325], ["jet_company_id", 13], ["created_at", "2019-10-15 19:40:35.587909"], ["updated_at", "2019-10-15 19:40:35.587909"]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+Redirected to http://localhost:3000/jets/5
+Completed 200 OK in 151ms (ActiveRecord: 4.7ms | Allocations: 2096809)
+
+
+Started GET "/jets/5" for ::1 at 2019-10-15 15:40:35 -0400
+Processing by JetsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[36mJet Load (0.9ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:19:in `show'
+  Rendering jets/show.html.erb within layouts/application
+  Rendered jets/show.html.erb within layouts/application (Duration: 1.1ms | Allocations: 25684)
+Completed 200 OK in 183ms (Views: 141.9ms | ActiveRecord: 0.9ms | Allocations: 2581996)
+
+
+Started GET "/jets/name" for ::1 at 2019-10-15 15:41:42 -0400
+  [1m[35m (1.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#show as HTML
+  Parameters: {"id"=>"name"}
+  [1m[36mJet Load (6.0ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."id" = ? LIMIT ?[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:19:in `show'
+Completed 404 Not Found in 86ms (ActiveRecord: 21.3ms | Allocations: 1220698)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Jet with 'id'=name):
+  
+app/controllers/jets_controller.rb:19:in `show'
+Started GET "/jets/new" for ::1 at 2019-10-15 15:41:47 -0400
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.3ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 155.0ms | Allocations: 2002386)
+Completed 200 OK in 426ms (Views: 305.9ms | ActiveRecord: 10.7ms | Allocations: 5513022)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:42:40 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 82.2ms | Allocations: 1070709)
+Completed 200 OK in 253ms (Views: 226.8ms | ActiveRecord: 1.2ms | Allocations: 3046308)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 15:44:04 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"MVVLfdf3zeUzu5ciWDQLPZxhQxyPCeXt8FVkw1LmARcfXzORvYvKWzQ1F2d3Q1/tcmPxEPxBG/c2Pr13DHjbJg==", "jet"=>{"model"=>"Airbus 380", "range"=>"", "seats"=>"235", "jet_company_id"=>"15"}, "commit"=>"Create Jet"}
+  [1m[35m (0.6ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (1.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Create (1.3ms)[0m  [1m[32mINSERT INTO "jets" ("model", "seats", "jet_company_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["model", "Airbus 380"], ["seats", 235], ["jet_company_id", 15], ["created_at", "2019-10-15 19:44:04.300041"], ["updated_at", "2019-10-15 19:44:04.300041"]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (1.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+Redirected to http://localhost:3000/jets/6
+Completed 200 OK in 158ms (ActiveRecord: 4.3ms | Allocations: 2077469)
+
+
+Started GET "/jets/6" for ::1 at 2019-10-15 15:44:04 -0400
+Processing by JetsController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mJet Load (0.9ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:19:in `show'
+  Rendering jets/show.html.erb within layouts/application
+  Rendered jets/show.html.erb within layouts/application (Duration: 2.9ms | Allocations: 51455)
+Completed 200 OK in 217ms (Views: 177.1ms | ActiveRecord: 0.9ms | Allocations: 2645547)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:45:51 -0400
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:14
+  Rendered jets/new.html.erb within layouts/application (Duration: 146.8ms | Allocations: 1878484)
+Completed 200 OK in 434ms (Views: 252.9ms | ActiveRecord: 25.3ms | Allocations: 5535723)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 15:47:27 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"41LQ1IaHO5TAIUAuCfc6/onynng8XGK8GNl81gsmVFzNWKg47Ps8KsevwGsmgG4uZ/AsdE8UnKbesqViVbiObQ==", "jet"=>{"model"=>"Airbus 380", "range"=>"234", "seats"=>"234", "jet_company_id"=>"14"}, "commit"=>"Create Jet"}
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (5.7ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "Airbus 380"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[36mJet Exists? (5.7ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "Airbus 380"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[35m (0.8ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 112.5ms | Allocations: 1573225)
+Completed 500 Internal Server Error in 359ms (ActiveRecord: 14.8ms | Allocations: 4852461)
+
+
+  
+ActionView::Template::Error (undefined method `map' for nil:NilClass):
+    20:   <%= f.number_field :seats %>
+    21:   <br>
+    22:   
+    23:   <%= f.collection_select :jet_company_id, @jet_companies, :id, :fancy_name, prompt: true  %>
+    24: 
+    25:   <%= f.submit %>
+    26: <% end %>
+  
+app/views/jets/new.html.erb:23
+app/views/jets/new.html.erb:12
+app/controllers/jets_controller.rb:14:in `create'
+Started GET "/jets/new" for ::1 at 2019-10-15 15:48:30 -0400
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 158.1ms | Allocations: 1879599)
+Completed 200 OK in 461ms (Views: 269.5ms | ActiveRecord: 21.2ms | Allocations: 5618157)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 15:48:37 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"S4nuT8Co+JkioMlu1x/8/MJ3F1rWk0LAMjS3Pdp74vJlg5ajqtT/JyUuSSv4aKgsLHWlVqXbvNr0X26JhOU4ww==", "jet"=>{"model"=>"Airbus 380", "range"=>"1324", "seats"=>"124", "jet_company_id"=>"15"}, "commit"=>"Create Jet"}
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (1.5ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (5.7ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "Airbus 380"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[36mJet Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "Airbus 380"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[35m (5.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+Completed 500 Internal Server Error in 17425ms (ActiveRecord: 14.7ms | Allocations: 2923861)
+
+
+  
+SystemExit (exit):
+  
+(byebug):1:in `exit'
+(byebug):1:in `create'
+app/controllers/jets_controller.rb:15:in `create'
+Started GET "/jets/new" for ::1 at 2019-10-15 15:48:58 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.3ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 809.3ms | Allocations: 9589092)
+Completed 200 OK in 1144ms (Views: 1121.5ms | ActiveRecord: 1.3ms | Allocations: 13632499)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 15:49:07 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"6tFoY8TT5VROLy1/bdGeUqyxBywvTog9Qw1mjWSsjLPE2xCPrq/i6kmhrTpCpsqCQrO1IFwGdieFZr85OjJWgg==", "jet"=>{"model"=>"thing", "range"=>"", "seats"=>"23", "jet_company_id"=>"16"}, "commit"=>"Create Jet"}
+  [1m[35m (4.9ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (5.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 16], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (5.8ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "thing"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[36mJet Exists? (5.7ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "thing"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+Completed 500 Internal Server Error in 506846ms (ActiveRecord: 23.2ms | Allocations: 2726516)
+
+
+  
+SystemExit (exit):
+  
+(byebug):1:in `exit'
+(byebug):1:in `create'
+app/controllers/jets_controller.rb:15:in `create'
+Started GET "/jets/new" for ::1 at 2019-10-15 15:57:34 -0400
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (5.4ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 205.7ms | Allocations: 2515610)
+Completed 200 OK in 4407ms (Views: 4382.6ms | ActiveRecord: 5.4ms | Allocations: 61039858)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:58:05 -0400
+  [1m[35m (5.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 108.1ms | Allocations: 1662047)
+Completed 500 Internal Server Error in 238ms (ActiveRecord: 14.0ms | Allocations: 3464938)
+
+
+  
+ActionView::Template::Error (undefined method `errors' for nil:NilClass):
+    1: <h1>✈️ Go ahead. Make ya jets!! ✈️</h1>
+    2: 
+    3: <% if @jet.errors.any? %>
+    4:   <ul>
+    5:     <% @jet.errors.full_messages.each do |message| %>
+    6:       <li><%= message %></li>
+  
+app/views/jets/new.html.erb:3
+Started GET "/jets/new" for ::1 at 2019-10-15 15:58:26 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:15
+  Rendered jets/new.html.erb within layouts/application (Duration: 97.3ms | Allocations: 1302952)
+Completed 200 OK in 254ms (Views: 228.3ms | ActiveRecord: 1.2ms | Allocations: 3274602)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:58:31 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.9ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:15
+  Rendered jets/new.html.erb within layouts/application (Duration: 79.2ms | Allocations: 1030516)
+Completed 200 OK in 218ms (Views: 195.0ms | ActiveRecord: 0.9ms | Allocations: 2788393)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 15:59:09 -0400
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 0.9ms | Allocations: 17504)
+Completed 500 Internal Server Error in 66ms (ActiveRecord: 0.0ms | Allocations: 780178)
+
+
+  
+ActionView::Template::Error (Nil location provided. Can't build URI.):
+    1: <h1>✈️ Go ahead. Make ya jets!! ✈️</h1>
+    2: 
+    3: 
+    4: <%= form_with model: @thing do |f| %>
+    5:   <%= f.label :model %>
+    6:   <%= f.text_field :model %>
+    7:   <br>
+  
+app/views/jets/new.html.erb:4
+Started GET "/jets/new" for ::1 at 2019-10-15 15:59:27 -0400
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:15
+  Rendered jets/new.html.erb within layouts/application (Duration: 147.0ms | Allocations: 1878477)
+Completed 200 OK in 445ms (Views: 265.9ms | ActiveRecord: 12.0ms | Allocations: 5557587)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:01:03 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (5.9ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:15
+  Rendered jets/new.html.erb within layouts/application (Duration: 86.7ms | Allocations: 1060772)
+Completed 200 OK in 250ms (Views: 218.2ms | ActiveRecord: 5.9ms | Allocations: 3036362)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:22:14 -0400
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 2.5ms | Allocations: 2029)
+Completed 500 Internal Server Error in 19ms (ActiveRecord: 0.4ms | Allocations: 11114)
+
+
+  
+ActionView::Template::Error (undefined method `errors' for nil:NilClass):
+    1: <h1>✈️ Go ahead. Make ya jets!! ✈️</h1>
+    2: 
+    3: <% if @jet.errors.any? %>
+    4:   <ul>
+    5:     <% @jet.errors.full_messages.each do |message| %>
+    6:       <li><%= message %></li>
+  
+app/views/jets/new.html.erb:3
+Started GET "/jets/new" for ::1 at 2019-10-15 16:22:35 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 11.4ms | Allocations: 1591)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms | Allocations: 3040)
+
+
+  
+ActionView::Template::Error (undefined method `valid?' for nil:NilClass):
+    1: <h1>✈️ Go ahead. Make ya jets!! ✈️</h1>
+    2: 
+    3: <% unless @jet.valid? %>
+    4:   <ul>
+    5:     <% @jet.errors.full_messages.each do |message| %>
+    6:       <li><%= message %></li>
+  
+app/views/jets/new.html.erb:3
+Started GET "/jets/new" for ::1 at 2019-10-15 16:22:54 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 11.0ms | Allocations: 8959)
+Completed 200 OK in 923ms (Views: 915.3ms | ActiveRecord: 0.9ms | Allocations: 1359186)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:23:02 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 4094)
+Completed 200 OK in 15ms (Views: 12.6ms | ActiveRecord: 0.2ms | Allocations: 10061)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:23:05 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 4.0ms | Allocations: 4442)
+Completed 200 OK in 16ms (Views: 13.4ms | ActiveRecord: 0.1ms | Allocations: 11338)
+
+
+Started POST "/jets/new" for ::1 at 2019-10-15 16:23:21 -0400
+  
+ActionController::RoutingError (No route matches [POST] "/jets/new"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/jets/new" for ::1 at 2019-10-15 16:23:32 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 6.1ms | Allocations: 4105)
+Completed 200 OK in 15ms (Views: 13.3ms | ActiveRecord: 0.2ms | Allocations: 10062)
+
+
+Started POST "/jets/new" for ::1 at 2019-10-15 16:23:44 -0400
+  
+ActionController::RoutingError (No route matches [POST] "/jets/new"):
+  
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/jets/new" for ::1 at 2019-10-15 16:24:00 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 4.8ms | Allocations: 2297)
+Completed 200 OK in 14ms (Views: 12.2ms | ActiveRecord: 0.2ms | Allocations: 9277)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 16:24:06 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"KICyQ+SfpRSM5q14yvgwwLY2xDgrBfOVRxlpHTzX9DsGisqvjuOiqotoLT3lj2QQWDR2NFhNDY+BcrCpYkkuCg==", "jet"=>{"model"=>"555", "range"=>"", "seats"=>"", "jet_company_id"=>""}, "commit"=>"Create Jet"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "555"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[36mJet Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "555"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+Completed 500 Internal Server Error in 5250ms (ActiveRecord: 0.4ms | Allocations: 44371)
+
+
+  
+SystemExit (exit):
+  
+(byebug):1:in `exit'
+(byebug):1:in `create'
+app/controllers/jets_controller.rb:15:in `create'
+Started GET "/jets/new" for ::1 at 2019-10-15 16:26:11 -0400
+  [1m[35m (5.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.1ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 95.5ms | Allocations: 1346940)
+Completed 200 OK in 287ms (Views: 172.9ms | ActiveRecord: 13.0ms | Allocations: 3979871)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 16:26:15 -0400
+Processing by JetsController#create as JS
+  Parameters: {"authenticity_token"=>"EF0cC37Wl9NheBY2M/P2G3jZ66PFh9o+SPfGbzSdxxA+V2TnFKqQbWb2lnMchKLLlttZr7bPJCSOnB/bagMdIQ==", "jet"=>{"model"=>"444", "range"=>"", "seats"=>"", "jet_company_id"=>""}, "commit"=>"Create Jet"}
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.8ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "444"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "444"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:11:in `create'
+  Rendering jets/new.html.erb within layouts/application
+  Rendered jets/new.html.erb within layouts/application (Duration: 77.6ms | Allocations: 1103814)
+Completed 500 Internal Server Error in 238ms (ActiveRecord: 3.3ms | Allocations: 3449752)
+
+
+  
+ActionView::Template::Error (undefined method `map' for nil:NilClass):
+    19:   <%= f.number_field :seats %>
+    20:   <br>
+    21:   
+    22:   <%= f.collection_select :jet_company_id, @jet_companies, :id, :fancy_name, prompt: true  %>
+    23: 
+    24:   <%= f.submit %>
+    25: <% end %>
+  
+app/views/jets/new.html.erb:22
+app/views/jets/new.html.erb:11
+app/controllers/jets_controller.rb:14:in `create'
+Started GET "/jets/new" for ::1 at 2019-10-15 16:27:37 -0400
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 109.2ms | Allocations: 1453961)
+Completed 200 OK in 321ms (Views: 187.2ms | ActiveRecord: 23.3ms | Allocations: 4296039)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:27:51 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 83.4ms | Allocations: 998924)
+Completed 200 OK in 205ms (Views: 189.7ms | ActiveRecord: 1.0ms | Allocations: 2604280)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:27:58 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.8ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 75.4ms | Allocations: 959296)
+Completed 200 OK in 206ms (Views: 182.6ms | ActiveRecord: 0.8ms | Allocations: 2712721)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:28:18 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.8ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 77.1ms | Allocations: 955903)
+Completed 200 OK in 214ms (Views: 185.5ms | ActiveRecord: 0.8ms | Allocations: 2707435)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 16:28:25 -0400
+Processing by JetsController#create as HTML
+  Parameters: {"authenticity_token"=>"rwDlZ+HOQTCFECcedDB5A3Fub08ZU+mA1dA52UyBMQmBCp2Li7JGjoKep1tbRy3Tn2zdQ2obF5oTu+BtEh/rOA==", "jet"=>{"model"=>"6676", "range"=>"", "seats"=>"", "jet_company_id"=>""}, "commit"=>"Create Jet"}
+  [1m[35m (4.8ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "6676"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "6676"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 64.9ms | Allocations: 910424)
+Completed 200 OK in 357ms (Views: 166.5ms | ActiveRecord: 9.0ms | Allocations: 4776810)
+
+
+Started GET "/jets" for ::1 at 2019-10-15 16:28:36 -0400
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for JetsController):
+  
+actionpack (6.0.0) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/jets/new" for ::1 at 2019-10-15 16:28:41 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (5.4ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 69.4ms | Allocations: 954213)
+Completed 200 OK in 207ms (Views: 178.9ms | ActiveRecord: 5.4ms | Allocations: 2705092)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 16:28:44 -0400
+Processing by JetsController#create as HTML
+  Parameters: {"authenticity_token"=>"NCUBJS007Nty93JRw/hWPWigejKNhq5+QgT7hzynSRcaL3nJR0jrZXV58hTsjwLthqLIPv7OUGSEbyIzYjmTJg==", "jet"=>{"model"=>"444", "range"=>"", "seats"=>"", "jet_company_id"=>""}, "commit"=>"Create Jet"}
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "444"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.4ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "444"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.8ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:22
+  Rendered jets/new.html.erb within layouts/application (Duration: 79.2ms | Allocations: 1051023)
+Completed 200 OK in 370ms (Views: 176.0ms | ActiveRecord: 4.5ms | Allocations: 4858002)
+
+
+Started GET "/jets" for ::1 at 2019-10-15 16:28:55 -0400
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for JetsController):
+  
+actionpack (6.0.0) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/jets" for ::1 at 2019-10-15 16:29:03 -0400
+Processing by JetsController#create as HTML
+  Parameters: {"authenticity_token"=>"NCUBJS007Nty93JRw/hWPWigejKNhq5+QgT7hzynSRcaL3nJR0jrZXV58hTsjwLthqLIPv7OUGSEbyIzYjmTJg==", "jet"=>{"model"=>"444", "range"=>"", "seats"=>"", "jet_company_id"=>""}, "commit"=>"Create Jet"}
+  [1m[35m (0.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "444"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.8ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "444"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[35m (4.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (0.9ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 80.5ms | Allocations: 1106604)
+Completed 200 OK in 389ms (Views: 199.5ms | ActiveRecord: 9.0ms | Allocations: 5105228)
+
+
+Started GET "/jets" for ::1 at 2019-10-15 16:29:40 -0400
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for JetsController):
+  
+actionpack (6.0.0) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started POST "/jets" for ::1 at 2019-10-15 16:29:48 -0400
+Processing by JetsController#create as HTML
+  Parameters: {"authenticity_token"=>"NCUBJS007Nty93JRw/hWPWigejKNhq5+QgT7hzynSRcaL3nJR0jrZXV58hTsjwLthqLIPv7OUGSEbyIzYjmTJg==", "jet"=>{"model"=>"444", "range"=>"", "seats"=>"", "jet_company_id"=>""}, "commit"=>"Create Jet"}
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "444"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "444"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+Redirected to http://localhost:3000/jets/new
+Completed 302 Found in 338ms (ActiveRecord: 14.4ms | Allocations: 4347056)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:29:48 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 124.2ms | Allocations: 1605082)
+Completed 200 OK in 246ms (Views: 221.8ms | ActiveRecord: 5.1ms | Allocations: 3202202)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 16:30:45 -0400
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by JetsController#create as HTML
+  Parameters: {"authenticity_token"=>"3OiGSlBEiyo4rAl3IXETrJFnY4vukvyp4251MLJ64PPy4v6mOjiMlD8iiTIOBkd8f2XRh53aArMlBayE7OQ6wg==", "jet"=>{"model"=>"6666", "range"=>"", "seats"=>"", "jet_company_id"=>""}, "commit"=>"Create Jet"}
+  [1m[35m (4.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "6666"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.6ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "6666"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 138.7ms | Allocations: 1754979)
+Completed 200 OK in 577ms (Views: 231.6ms | ActiveRecord: 25.9ms | Allocations: 7380263)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 16:30:56 -0400
+Processing by JetsController#create as HTML
+  Parameters: {"authenticity_token"=>"OZZfWR/RqOowQZRbQAbdQRRAbnaU+pqOHjYRcib7wzAXnCe1da2vVDfPFB5vcYmR+kLceueyZJTYXcjGeGUZAQ==", "jet"=>{"model"=>"6666", "range"=>"333", "seats"=>"333", "jet_company_id"=>"14"}, "commit"=>"Create Jet"}
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (5.9ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "6666"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Create (1.2ms)[0m  [1m[32mINSERT INTO "jets" ("model", "seats", "range", "jet_company_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["model", "6666"], ["seats", 333], ["range", 333], ["jet_company_id", 14], ["created_at", "2019-10-15 20:30:56.616016"], ["updated_at", "2019-10-15 20:30:56.616016"]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (6.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[36mJet Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? AND "jets"."id" != ? LIMIT ?[0m  [["model", "6666"], ["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+Redirected to http://localhost:3000/jets/7
+Completed 302 Found in 241ms (ActiveRecord: 17.4ms | Allocations: 2730042)
+
+
+Started GET "/jets/7" for ::1 at 2019-10-15 16:30:56 -0400
+Processing by JetsController#show as HTML
+  Parameters: {"id"=>"7"}
+  [1m[36mJet Load (1.4ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:20:in `show'
+  Rendering jets/show.html.erb within layouts/application
+  Rendered jets/show.html.erb within layouts/application (Duration: 3.0ms | Allocations: 58959)
+Completed 200 OK in 207ms (Views: 167.6ms | ActiveRecord: 1.4ms | Allocations: 2563203)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:30:59 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (5.8ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 78.5ms | Allocations: 956522)
+Completed 200 OK in 216ms (Views: 191.1ms | ActiveRecord: 5.8ms | Allocations: 2614534)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 16:31:08 -0400
+Processing by JetsController#create as HTML
+  Parameters: {"authenticity_token"=>"4p4RLZIS8341m3qx2pQN114m7evV4OQL4xgb44sSBrLMlGnB+G70wDIV+vT141kHsCRf56aoGhElc8JX1Yzcgw==", "jet"=>{"model"=>"6676", "range"=>"333", "seats"=>"333", "jet_company_id"=>"14"}, "commit"=>"Create Jet"}
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (0.8ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "6676"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Create (1.3ms)[0m  [1m[32mINSERT INTO "jets" ("model", "seats", "range", "jet_company_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["model", "6676"], ["seats", 333], ["range", 333], ["jet_company_id", 14], ["created_at", "2019-10-15 20:31:08.257883"], ["updated_at", "2019-10-15 20:31:08.257883"]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (5.4ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[36mJet Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? AND "jets"."id" != ? LIMIT ?[0m  [["model", "6676"], ["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+Redirected to http://localhost:3000/jets/8
+Completed 302 Found in 236ms (ActiveRecord: 12.0ms | Allocations: 2739316)
+
+
+Started GET "/jets/8" for ::1 at 2019-10-15 16:31:08 -0400
+Processing by JetsController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mJet Load (1.0ms)[0m  [1m[34mSELECT "jets".* FROM "jets" WHERE "jets"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:20:in `show'
+  Rendering jets/show.html.erb within layouts/application
+  Rendered jets/show.html.erb within layouts/application (Duration: 1.0ms | Allocations: 24692)
+Completed 200 OK in 156ms (Views: 119.0ms | ActiveRecord: 1.0ms | Allocations: 1902416)
+
+
+Started GET "/jets/new" for ::1 at 2019-10-15 16:31:11 -0400
+Processing by JetsController#new as HTML
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 76.9ms | Allocations: 956518)
+Completed 200 OK in 210ms (Views: 185.8ms | ActiveRecord: 1.2ms | Allocations: 2614534)
+
+
+Started POST "/jets" for ::1 at 2019-10-15 16:31:17 -0400
+Processing by JetsController#create as HTML
+  Parameters: {"authenticity_token"=>"UEMyID1lVzUH6x3gPy/U6OSA79oY/XTpahSj/2dKRVR+SUrMVxlQiwBlnaUQWIA4CoJd1mu1ivOsf3pLOdSfZQ==", "jet"=>{"model"=>"6676", "range"=>"333", "seats"=>"333", "jet_company_id"=>"14"}, "commit"=>"Create Jet"}
+  [1m[35m (0.5ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJetCompany Load (1.2ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies" WHERE "jet_companies"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[36mJet Exists? (0.9ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "6676"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:9:in `create'
+  [1m[35m (0.7ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[36mJet Exists? (5.6ms)[0m  [1m[34mSELECT 1 AS one FROM "jets" WHERE "jets"."model" = ? LIMIT ?[0m  [["model", "6676"], ["LIMIT", 1]]
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/jets_controller.rb:12:in `create'
+  Rendering jets/new.html.erb within layouts/application
+  [1m[36mJetCompany Load (1.0ms)[0m  [1m[34mSELECT "jet_companies".* FROM "jet_companies"[0m
+  ↳ app/views/jets/new.html.erb:23
+  Rendered jets/new.html.erb within layouts/application (Duration: 79.9ms | Allocations: 1013666)
+Completed 200 OK in 416ms (Views: 197.5ms | ActiveRecord: 10.8ms | Allocations: 5000968)
+
+

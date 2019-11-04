@@ -1,0 +1,954 @@
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMonsters (20191016144621)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "monsters" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "scariness" integer, "speed" decimal, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191016144621"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateHumans (20191016144949)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "humans" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "living" boolean, "speed" decimal, "monster_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_3b53d2723b"
+FOREIGN KEY ("monster_id")
+  REFERENCES "monsters" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_humans_on_monster_id" ON "humans" ("monster_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191016144949"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-16 14:54:13.496042"], ["updated_at", "2019-10-16 14:54:13.496042"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.4ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Frankenstein's Monster"], ["created_at", "2019-10-16 14:54:45.093316"], ["updated_at", "2019-10-16 14:54:45.093316"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHuman Create (0.7ms)[0m  [1m[32mINSERT INTO "humans" ("name", "speed", "monster_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Altaf"], ["speed", 1000.5], ["monster_id", 1], ["created_at", "2019-10-16 14:56:44.690385"], ["updated_at", "2019-10-16 14:56:44.690385"]]
+  [1m[35m (1.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mHuman Load (0.3ms)[0m  [1m[34mSELECT "humans".* FROM "humans" ORDER BY "humans"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Destroy (0.6ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.5ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" ORDER BY "monsters"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mHuman Load (0.1ms)[0m  [1m[34mSELECT "humans".* FROM "humans" WHERE "humans"."monster_id" = ?[0m  [["monster_id", 1]]
+  [1m[36mHuman Destroy (0.3ms)[0m  [1m[31mDELETE FROM "humans" WHERE "humans"."id" = ?[0m  [["id", 1]]
+  [1m[36mMonster Destroy (0.1ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 1]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (11.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.4ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Frankenstein's Monster"], ["scariness", 4], ["speed", 5.0], ["created_at", "2019-10-16 15:05:21.285384"], ["updated_at", "2019-10-16 15:05:21.285384"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Mike"], ["scariness", -6], ["speed", 7.0], ["created_at", "2019-10-16 15:05:21.288926"], ["updated_at", "2019-10-16 15:05:21.288926"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.2ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Candy Man"], ["scariness", 11], ["speed", 7.0], ["created_at", "2019-10-16 15:05:21.291792"], ["updated_at", "2019-10-16 15:05:21.291792"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Pennywise"], ["scariness", 11], ["speed", 87.6], ["created_at", "2019-10-16 15:05:21.294697"], ["updated_at", "2019-10-16 15:05:21.294697"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Chucky"], ["scariness", 9], ["speed", 3.0], ["created_at", "2019-10-16 15:05:21.297680"], ["updated_at", "2019-10-16 15:05:21.297680"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.4ms)[0m  [1m[32mINSERT INTO "monsters" ("scariness", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["scariness", 11], ["created_at", "2019-10-16 15:17:01.949924"], ["updated_at", "2019-10-16 15:17:01.949924"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Started GET "/humans/new" for ::1 at 2019-10-16 11:25:47 -0400
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+AbstractController::ActionNotFound (The action 'new' could not be found for HumansController):
+  
+actionpack (6.0.0) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/humans/new" for ::1 at 2019-10-16 11:26:07 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HumansController#new as HTML
+Completed 406 Not Acceptable in 5ms (ActiveRecord: 0.0ms | Allocations: 2257)
+
+
+  
+ActionController::MissingExactTemplate (HumansController#new is missing a template for request formats: text/html):
+  
+actionpack (6.0.0) lib/action_controller/metal/implicit_render.rb:45:in `default_render'
+actionpack (6.0.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `block in send_action'
+actionpack (6.0.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `tap'
+actionpack (6.0.0) lib/action_controller/metal/basic_implicit_render.rb:6:in `send_action'
+actionpack (6.0.0) lib/abstract_controller/base.rb:196:in `process_action'
+actionpack (6.0.0) lib/action_controller/metal/rendering.rb:30:in `process_action'
+actionpack (6.0.0) lib/abstract_controller/callbacks.rb:42:in `block in process_action'
+activesupport (6.0.0) lib/active_support/callbacks.rb:135:in `run_callbacks'
+actionpack (6.0.0) lib/abstract_controller/callbacks.rb:41:in `process_action'
+actionpack (6.0.0) lib/action_controller/metal/rescue.rb:22:in `process_action'
+actionpack (6.0.0) lib/action_controller/metal/instrumentation.rb:33:in `block in process_action'
+activesupport (6.0.0) lib/active_support/notifications.rb:180:in `block in instrument'
+activesupport (6.0.0) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (6.0.0) lib/active_support/notifications.rb:180:in `instrument'
+actionpack (6.0.0) lib/action_controller/metal/instrumentation.rb:32:in `process_action'
+actionpack (6.0.0) lib/action_controller/metal/params_wrapper.rb:245:in `process_action'
+activerecord (6.0.0) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (6.0.0) lib/abstract_controller/base.rb:136:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.6ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Upper case"], ["created_at", "2019-10-16 15:28:32.058465"], ["updated_at", "2019-10-16 15:28:32.058465"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/humans/new" for ::1 at 2019-10-16 11:29:36 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HumansController#new as HTML
+  Rendering humans/new.html.erb within layouts/application
+  Rendered humans/new.html.erb within layouts/application (Duration: 0.2ms | Allocations: 78)
+[Webpacker] Compiling…
+[Webpacker] Compiled all packs in /Users/sdoran/Development/code/batches/nyc-web-091619/21-rails-validations/halloween/public/packs
+Completed 200 OK in 3606ms (Views: 3605.1ms | ActiveRecord: 0.0ms | Allocations: 1365608)
+
+
+Started GET "/humans/new" for ::1 at 2019-10-16 11:38:24 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HumansController#new as HTML
+  Rendering humans/new.html.erb within layouts/application
+  Rendered humans/new.html.erb within layouts/application (Duration: 117.9ms | Allocations: 76043)
+Completed 500 Internal Server Error in 120ms (ActiveRecord: 0.0ms | Allocations: 77481)
+
+
+  
+ActionView::Template::Error (undefined method `checkbox' for #<ActionView::Helpers::FormBuilder:0x00007fde937450d0>
+Did you mean?  check_box):
+     5:   <%= f.text_field :name %>
+     6:   <br>
+     7:   <%= f.label :living %>
+     8:   <%= f.checkbox :living %>
+     9:   <br>
+    10:   <%= f.label :speed %>
+    11:   <%= f.number_field :speed %>
+  
+app/views/humans/new.html.erb:8
+app/views/humans/new.html.erb:3
+Started GET "/humans/new" for ::1 at 2019-10-16 11:38:58 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by HumansController#new as HTML
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.1ms | Allocations: 1912)
+
+
+  
+ActiveRecord::StatementInvalid (Could not find table 'humen'):
+  
+app/controllers/humans_controller.rb:7:in `new'
+Started PUT "/__web_console/repl_sessions/3e7b5232715895e93bbccf548d33c7ef" for ::1 at 2019-10-16 11:39:12 -0400
+Started PUT "/__web_console/repl_sessions/3e7b5232715895e93bbccf548d33c7ef" for ::1 at 2019-10-16 11:39:13 -0400
+Started PUT "/__web_console/repl_sessions/3e7b5232715895e93bbccf548d33c7ef" for ::1 at 2019-10-16 11:39:14 -0400
+  [1m[36mHuman Load (0.4ms)[0m  [1m[34mSELECT "humen".* FROM "humen" ORDER BY "humen"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/humans_controller.rb:7:in `new'
+Started POST "/__web_console/repl_sessions/3e7b5232715895e93bbccf548d33c7ef/trace" for ::1 at 2019-10-16 11:40:22 -0400
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateVictims (20191016154118)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "victims" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "speed" decimal, "living" boolean, "monster_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fe5a085225"
+FOREIGN KEY ("monster_id")
+  REFERENCES "monsters" ("id")
+)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE  INDEX "index_victims_on_monster_id" ON "victims" ("monster_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191016154118"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/victims/new" for ::1 at 2019-10-16 11:44:13 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:13
+  Rendered victims/new.html.erb within layouts/application (Duration: 12.1ms | Allocations: 6876)
+Completed 200 OK in 38ms (Views: 28.3ms | ActiveRecord: 1.1ms | Allocations: 24724)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 11:48:29 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 6.6ms | Allocations: 5859)
+Completed 200 OK in 26ms (Views: 17.4ms | ActiveRecord: 1.1ms | Allocations: 21385)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 2]]
+  [1m[36mMonster Destroy (0.3ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 2]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 3]]
+  [1m[36mMonster Destroy (0.2ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 3]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 4]]
+  [1m[36mMonster Destroy (0.2ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 4]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 5]]
+  [1m[36mMonster Destroy (0.2ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 5]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 6]]
+  [1m[36mMonster Destroy (0.2ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 6]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 7]]
+  [1m[36mMonster Destroy (0.2ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 7]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 8]]
+  [1m[36mMonster Destroy (0.2ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 8]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Mike"], ["scariness", -6], ["speed", 7.0], ["created_at", "2019-10-16 15:49:06.171205"], ["updated_at", "2019-10-16 15:49:06.171205"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Pennywise"], ["scariness", 11], ["speed", 87.6], ["created_at", "2019-10-16 15:49:06.174668"], ["updated_at", "2019-10-16 15:49:06.174668"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Chucky"], ["scariness", 9], ["speed", 3.0], ["created_at", "2019-10-16 15:49:06.177743"], ["updated_at", "2019-10-16 15:49:06.177743"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/victims/new" for ::1 at 2019-10-16 11:49:08 -0400
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 4.5ms | Allocations: 1690)
+Completed 200 OK in 13ms (Views: 11.5ms | ActiveRecord: 0.2ms | Allocations: 7909)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 9]]
+  [1m[36mMonster Destroy (0.3ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 9]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 10]]
+  [1m[36mMonster Destroy (0.2ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 10]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mVictim Load (0.1ms)[0m  [1m[34mSELECT "victims".* FROM "victims" WHERE "victims"."monster_id" = ?[0m  [["monster_id", 11]]
+  [1m[36mMonster Destroy (0.3ms)[0m  [1m[31mDELETE FROM "monsters" WHERE "monsters"."id" = ?[0m  [["id", 11]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Frankenstein's Monster"], ["scariness", 4], ["speed", 5.0], ["created_at", "2019-10-16 15:50:42.148812"], ["updated_at", "2019-10-16 15:50:42.148812"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.2ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Mike"], ["scariness", -6], ["speed", 7.0], ["created_at", "2019-10-16 15:50:42.151999"], ["updated_at", "2019-10-16 15:50:42.151999"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.2ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Candy Man"], ["scariness", 11], ["speed", 7.0], ["created_at", "2019-10-16 15:50:42.154656"], ["updated_at", "2019-10-16 15:50:42.154656"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Pennywise"], ["scariness", 11], ["speed", 87.6], ["created_at", "2019-10-16 15:50:42.156996"], ["updated_at", "2019-10-16 15:50:42.156996"]]
+  [1m[35m (0.4ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Chucky"], ["scariness", 9], ["speed", 3.0], ["created_at", "2019-10-16 15:50:42.159815"], ["updated_at", "2019-10-16 15:50:42.159815"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/victims/new" for ::1 at 2019-10-16 11:50:44 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 5.6ms | Allocations: 5439)
+Completed 200 OK in 19ms (Views: 11.7ms | ActiveRecord: 0.9ms | Allocations: 17634)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 11:51:15 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"mv2MN0bW+k0XzMcQgFc46PvDRD8Nw7OnY7b4Bh7kx8vnJHVF9Xa+3V9zZsGCLXxhety/WVxh7CjJKNY7q1qYXA==", "victim"=>{"name"=>"", "living"=>"1", "speed"=>"235", "monster_id"=>"13"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  Rendering victims/new.html.erb within layouts/application
+  Rendered victims/new.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1930)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.3ms | Allocations: 10244)
+
+
+  
+ActionView::Template::Error (undefined method `map' for nil:NilClass):
+    19:   <%= f.label :speed %>
+    20:   <%= f.number_field :speed %>
+    21:   <br>
+    22:   <%= f.collection_select :monster_id, @monsters, :id, :name, prompt: true %>
+    23:   <br>
+    24:   <%= f.submit %>
+    25: <% end %>
+  
+app/views/victims/new.html.erb:22
+app/views/victims/new.html.erb:12
+app/controllers/victims_controller.rb:18:in `create'
+Started POST "/victims" for ::1 at 2019-10-16 11:51:37 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"mv2MN0bW+k0XzMcQgFc46PvDRD8Nw7OnY7b4Bh7kx8vnJHVF9Xa+3V9zZsGCLXxhety/WVxh7CjJKNY7q1qYXA==", "victim"=>{"name"=>"", "living"=>"1", "speed"=>"235", "monster_id"=>"13"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 2096)
+Completed 200 OK in 17ms (Views: 9.8ms | ActiveRecord: 0.3ms | Allocations: 12433)
+
+
+Started GET "/victims" for ::1 at 2019-10-16 11:51:39 -0400
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for VictimsController):
+  
+actionpack (6.0.0) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/victims/new" for ::1 at 2019-10-16 11:51:42 -0400
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.4ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 4.9ms | Allocations: 1782)
+Completed 200 OK in 13ms (Views: 11.2ms | ActiveRecord: 0.4ms | Allocations: 7964)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 11:51:46 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"aZ3UEG7OwqYJ4ZrPg85eYt1reRBFGq+EOP+mWqsMwNgURC1i3W6GNkFeOx6BtBrrXHSCdhS48AuSYYhnHrKfTw==", "victim"=>{"name"=>"", "living"=>"1", "speed"=>"2345", "monster_id"=>"12"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1745)
+Completed 200 OK in 17ms (Views: 9.2ms | ActiveRecord: 0.5ms | Allocations: 11143)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 11:51:58 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"KhGvTU/CivAD7H7CPEpReg7z+4wvz1sTvn9RlyCaWspXyFY//GLOYEtT3xM+MBXzj+wA6n5tBJwU4X+qlSQFXQ==", "victim"=>{"name"=>"thing", "living"=>"1", "speed"=>"2345", "monster_id"=>"12"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1747)
+Completed 200 OK in 17ms (Views: 10.1ms | ActiveRecord: 0.6ms | Allocations: 10847)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 11:52:06 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"+cJoERjFSOXtfCDUm/EYo6KDVoq+le8XhwLvJne4gLiEG5Fjq2UMdaXDgQWZi1wqI5yt7O83sJgtnMEbwgbfLw==", "victim"=>{"name"=>"Mary", "living"=>"1", "speed"=>"2345", "monster_id"=>"12"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 12], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mVictim Create (0.6ms)[0m  [1m[32mINSERT INTO "victims" ("name", "speed", "living", "monster_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Mary"], ["speed", 2345.0], ["living", 1], ["monster_id", 12], ["created_at", "2019-10-16 15:52:06.103539"], ["updated_at", "2019-10-16 15:52:06.103539"]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+Redirected to http://localhost:3000/victims/1
+Completed 302 Found in 8ms (ActiveRecord: 1.4ms | Allocations: 3980)
+
+
+Started GET "/victims/1" for ::1 at 2019-10-16 11:52:06 -0400
+Processing by VictimsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering victims/show.html.erb within layouts/application
+  Rendered victims/show.html.erb within layouts/application (Duration: 0.2ms | Allocations: 73)
+Completed 200 OK in 7ms (Views: 6.6ms | ActiveRecord: 0.0ms | Allocations: 6381)
+
+
+Started GET "/victims/1" for ::1 at 2019-10-16 11:52:20 -0400
+Processing by VictimsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering victims/show.html.erb within layouts/application
+  Rendered victims/show.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+Completed 200 OK in 11ms (Views: 10.1ms | ActiveRecord: 0.0ms | Allocations: 6161)
+
+
+Started GET "/victims/1" for ::1 at 2019-10-16 11:52:22 -0400
+Processing by VictimsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering victims/show.html.erb within layouts/application
+  Rendered victims/show.html.erb within layouts/application (Duration: 0.4ms | Allocations: 85)
+Completed 200 OK in 26ms (Views: 24.8ms | ActiveRecord: 0.0ms | Allocations: 7190)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 11:52:26 -0400
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 4.9ms | Allocations: 2110)
+Completed 200 OK in 15ms (Views: 12.6ms | ActiveRecord: 0.2ms | Allocations: 8434)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 11:52:36 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"So7OKwR4AzVAxfHpwd7N0PmHaiHA11OXJ6sJzA/2gd43VzdZt9hHpQh6UDjDpIlZeJiRR5F1DBiNNSfxukjeSQ==", "victim"=>{"name"=>"", "living"=>"1", "speed"=>"13", "monster_id"=>""}, "commit"=>"Create Victim"}
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 3.7ms | Allocations: 1767)
+Completed 200 OK in 15ms (Views: 10.2ms | ActiveRecord: 0.2ms | Allocations: 9380)
+
+
+Started GET "/victims" for ::1 at 2019-10-16 11:52:58 -0400
+  
+AbstractController::ActionNotFound (The action 'index' could not be found for VictimsController):
+  
+actionpack (6.0.0) lib/abstract_controller/base.rb:131:in `process'
+actionview (6.0.0) lib/action_view/rendering.rb:39:in `process'
+actionpack (6.0.0) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (6.0.0) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:51:in `dispatch'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:33:in `serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.0) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.0) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.0.7) lib/rack/tempfile_reaper.rb:15:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+actionpack (6.0.0) lib/action_dispatch/http/content_security_policy.rb:18:in `call'
+rack (2.0.7) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.7) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/cookies.rb:648:in `call'
+activerecord (6.0.0) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.0) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.0) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+web-console (4.0.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.0.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.0.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.0) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.0) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.0) lib/rails/rack/logger.rb:26:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.0) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+actionpack (6.0.0) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+webpacker (4.0.7) lib/webpacker/dev_server_proxy.rb:29:in `perform_request'
+rack-proxy (0.6.5) lib/rack/proxy.rb:57:in `call'
+railties (6.0.0) lib/rails/engine.rb:526:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/victims/new" for ::1 at 2019-10-16 11:54:21 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 5.9ms | Allocations: 5445)
+Completed 200 OK in 35ms (Views: 11.5ms | ActiveRecord: 1.0ms | Allocations: 17680)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 11:54:42 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"Hpy5WrPBNxrNHAJ6XvDeOzlm1k3NO8u51xXKp5u1kKRjRUAoAGFzioWjo6tcipqyuHktK5yZlDZ9i+SaLgvPMw==", "victim"=>{"name"=>"Steven", "living"=>"1", "speed"=>"4", "monster_id"=>"15"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 15], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mVictim Create (0.4ms)[0m  [1m[32mINSERT INTO "victims" ("name", "speed", "living", "monster_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Steven"], ["speed", 4.0], ["living", 1], ["monster_id", 15], ["created_at", "2019-10-16 15:54:42.874180"], ["updated_at", "2019-10-16 15:54:42.874180"]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+Redirected to http://localhost:3000/victims/2
+Completed 302 Found in 10ms (ActiveRecord: 1.4ms | Allocations: 4628)
+
+
+Started GET "/victims/2" for ::1 at 2019-10-16 11:54:42 -0400
+Processing by VictimsController#show as HTML
+  Parameters: {"id"=>"2"}
+  Rendering victims/show.html.erb within layouts/application
+  Rendered victims/show.html.erb within layouts/application (Duration: 0.0ms | Allocations: 4)
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.0ms | Allocations: 6166)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 11:57:46 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 6.6ms | Allocations: 5807)
+Completed 200 OK in 21ms (Views: 12.9ms | ActiveRecord: 1.0ms | Allocations: 18790)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 11:57:51 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"afCHJNgiC5dpwVq8euDw6QoJl7uoJ6OrSn05JNWzScgUKX5Wa4JPByF++214mrRgixZs3fmF/CTg4xcZYA0WXw==", "victim"=>{"name"=>"", "living"=>"0", "speed"=>"", "monster_id"=>""}, "commit"=>"Create Victim"}
+Redirected to http://localhost:3000/victims/new
+Completed 302 Found in 5ms (ActiveRecord: 0.0ms | Allocations: 2541)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 11:57:51 -0400
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1780)
+Completed 200 OK in 9ms (Views: 7.9ms | ActiveRecord: 0.1ms | Allocations: 7983)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 11:59:38 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 6.3ms | Allocations: 5804)
+Completed 200 OK in 37ms (Views: 14.1ms | ActiveRecord: 1.0ms | Allocations: 18821)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 12:00:03 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"EsgNj/4iTGngJ/TZkAUQMGUICeSP8O2Do5Qt2ZvMknVvEfT9TYII+aiYVQiSf1S55Bfygt5SsgwJCgPkLnLN4g==", "victim"=>{"name"=>"Danny", "living"=>"0", "speed"=>"2", "monster_id"=>"13"}, "commit"=>"Create Victim"}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 13], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mVictim Create (0.5ms)[0m  [1m[32mINSERT INTO "victims" ("name", "speed", "living", "monster_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Danny"], ["speed", 2.0], ["living", 0], ["monster_id", 13], ["created_at", "2019-10-16 16:00:03.938357"], ["updated_at", "2019-10-16 16:00:03.938357"]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+Redirected to http://localhost:3000/victims/3
+Completed 302 Found in 16ms (ActiveRecord: 2.2ms | Allocations: 14217)
+
+
+Started GET "/victims/3" for ::1 at 2019-10-16 12:00:03 -0400
+Processing by VictimsController#show as HTML
+  Parameters: {"id"=>"3"}
+  Rendering victims/show.html.erb within layouts/application
+  Rendered victims/show.html.erb within layouts/application (Duration: 1.6ms | Allocations: 2041)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 3022)
+
+
+  
+ActionView::Template::Error (undefined method `each' for "Victim successfully saved":String):
+    1: You're on the victim show page
+    2: 
+    3: <% if flash[:notice]%>
+    4:   <% flash[:notice].each do |notice|%>
+    5:     <p><%= notice %></p>
+    6:   <% end%>
+    7: <% end%>
+  
+app/views/victims/show.html.erb:4
+Started GET "/victims/new" for ::1 at 2019-10-16 12:00:15 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  
+SyntaxError (/Users/sdoran/Development/code/batches/nyc-web-091619/21-rails-validations/halloween/app/controllers/victims_controller.rb:16: syntax error, unexpected ']', expecting end
+...= "[Victim successfully saved"]
+...                              ^):
+  
+app/controllers/victims_controller.rb:16: syntax error, unexpected ']', expecting end
+app/controllers/victims_controller.rb:16: syntax error, unexpected ']', expecting end
+app/controllers/victims_controller.rb:16: syntax error, unexpected ']', expecting end
+Started GET "/victims/new" for ::1 at 2019-10-16 12:00:25 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 6.3ms | Allocations: 5458)
+Completed 200 OK in 22ms (Views: 13.1ms | ActiveRecord: 0.9ms | Allocations: 17741)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 12:00:32 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"xS+oBdjKNwffI6vefMav9pkp6peCnjBZuZwFVpbm0iC49lF3a2pzl5ecCg9+vOt/GDYR8dM8b9YTAitrI1iNtw==", "victim"=>{"name"=>"Dannuy", "living"=>"0", "speed"=>"3", "monster_id"=>"14"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.3ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 14], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mVictim Create (0.6ms)[0m  [1m[32mINSERT INTO "victims" ("name", "speed", "living", "monster_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Dannuy"], ["speed", 3.0], ["living", 0], ["monster_id", 14], ["created_at", "2019-10-16 16:00:32.507609"], ["updated_at", "2019-10-16 16:00:32.507609"]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+Redirected to http://localhost:3000/victims/4
+Completed 302 Found in 10ms (ActiveRecord: 1.7ms | Allocations: 4642)
+
+
+Started GET "/victims/4" for ::1 at 2019-10-16 12:00:32 -0400
+Processing by VictimsController#show as HTML
+  Parameters: {"id"=>"4"}
+  Rendering victims/show.html.erb within layouts/application
+  Rendered victims/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 22)
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.0ms | Allocations: 6197)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateMonsters (20191016144621)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "monsters" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "scariness" integer, "speed" decimal, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191016144621"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateVictims (20191016154118)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "victims" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "speed" decimal, "living" boolean, "monster_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_fe5a085225"
+FOREIGN KEY ("monster_id")
+  REFERENCES "monsters" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_victims_on_monster_id" ON "victims" ("monster_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191016154118"]]
+  [1m[35m (0.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-16 16:13:48.166684"], ["updated_at", "2019-10-16 16:13:48.166684"]]
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Frankenstein's Monster"], ["scariness", 4], ["speed", 5.0], ["created_at", "2019-10-16 16:13:54.635370"], ["updated_at", "2019-10-16 16:13:54.635370"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.3ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Mike"], ["scariness", -6], ["speed", 7.0], ["created_at", "2019-10-16 16:13:54.639275"], ["updated_at", "2019-10-16 16:13:54.639275"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.2ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Candy Man"], ["scariness", 11], ["speed", 7.0], ["created_at", "2019-10-16 16:13:54.642584"], ["updated_at", "2019-10-16 16:13:54.642584"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.2ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Pennywise"], ["scariness", 11], ["speed", 87.6], ["created_at", "2019-10-16 16:13:54.645710"], ["updated_at", "2019-10-16 16:13:54.645710"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mMonster Create (0.2ms)[0m  [1m[32mINSERT INTO "monsters" ("name", "scariness", "speed", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Chucky"], ["scariness", 9], ["speed", 3.0], ["created_at", "2019-10-16 16:13:54.649168"], ["updated_at", "2019-10-16 16:13:54.649168"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/victims/new" for ::1 at 2019-10-16 12:15:42 -0400
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 8.1ms | Allocations: 5495)
+Completed 200 OK in 22ms (Views: 15.2ms | ActiveRecord: 0.2ms | Allocations: 18096)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 12:15:45 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"0b/EOzR/p+fL1lbUBRVl+vcu2OSh1nWACHPuwjjyssesZj1Jh9/jd4Np9wUHbyFzdjEjgvB0Kg+i7cD/jUztUA==", "victim"=>{"name"=>"", "living"=>"0", "speed"=>"3", "monster_id"=>""}, "commit"=>"Create Victim"}
+Redirected to http://localhost:3000/victims/new
+Completed 302 Found in 4ms (ActiveRecord: 0.0ms | Allocations: 2552)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 12:15:45 -0400
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1774)
+Completed 200 OK in 10ms (Views: 8.9ms | ActiveRecord: 0.1ms | Allocations: 7985)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 12:16:06 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"USKFl1JiOtE2UaNwCmKrsEdqctgkdtu6Z9GGNdsU2Nws+3zl4cJ+QX7uAqEIGO85xnWJvnXUhDXNT6gIbqqHSw==", "victim"=>{"name"=>"thing", "living"=>"1", "speed"=>"-7", "monster_id"=>"3"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:15:in `create'
+  [1m[36mMonster Load (0.3ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:15:in `create'
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/victims_controller.rb:15:in `create'
+Redirected to http://localhost:3000/victims/new
+Completed 302 Found in 9ms (ActiveRecord: 0.5ms | Allocations: 3778)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 12:16:06 -0400
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.2ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 2.7ms | Allocations: 1768)
+Completed 200 OK in 11ms (Views: 9.9ms | ActiveRecord: 0.2ms | Allocations: 7969)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 12:16:34 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"VIJv35AqHzCpdDSUjFSte2vkqNFeGAMVTd+KfKmzcDkpW5atI4pboOHLlUWOLuny6vtTtw+6XJrnQaRBHA0vrg==", "victim"=>{"name"=>"Danny", "living"=>"0", "speed"=>"5", "monster_id"=>"2"}, "commit"=>"Create Victim"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:15:in `create'
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:15:in `create'
+  [1m[36mVictim Create (0.4ms)[0m  [1m[32mINSERT INTO "victims" ("name", "speed", "living", "monster_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "Danny"], ["speed", 5.0], ["living", 0], ["monster_id", 2], ["created_at", "2019-10-16 16:16:34.264322"], ["updated_at", "2019-10-16 16:16:34.264322"]]
+  ↳ app/controllers/victims_controller.rb:15:in `create'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/victims_controller.rb:15:in `create'
+Redirected to http://localhost:3000/victims/1
+Completed 302 Found in 7ms (ActiveRecord: 1.4ms | Allocations: 3901)
+
+
+Started GET "/victims/1" for ::1 at 2019-10-16 12:16:34 -0400
+Processing by VictimsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering victims/show.html.erb within layouts/application
+  Rendered victims/show.html.erb within layouts/application (Duration: 0.7ms | Allocations: 182)
+Completed 200 OK in 10ms (Views: 8.9ms | ActiveRecord: 0.0ms | Allocations: 6501)
+
+
+Started GET "/victims/1" for ::1 at 2019-10-16 12:16:39 -0400
+Processing by VictimsController#show as HTML
+  Parameters: {"id"=>"1"}
+  Rendering victims/show.html.erb within layouts/application
+  Rendered victims/show.html.erb within layouts/application (Duration: 0.1ms | Allocations: 17)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.0ms | Allocations: 6180)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 12:17:05 -0400
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"VIJv35AqHzCpdDSUjFSte2vkqNFeGAMVTd+KfKmzcDkpW5atI4pboOHLlUWOLuny6vtTtw+6XJrnQaRBHA0vrg==", "victim"=>{"name"=>"", "living"=>"0", "speed"=>"5", "monster_id"=>"2"}, "commit"=>"Create Victim"}
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters" WHERE "monsters"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/victims_controller.rb:14:in `create'
+Redirected to http://localhost:3000/victims/new
+Completed 302 Found in 14ms (ActiveRecord: 1.2ms | Allocations: 14195)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 12:17:05 -0400
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1799)
+Completed 200 OK in 8ms (Views: 7.1ms | ActiveRecord: 0.1ms | Allocations: 8152)
+
+
+Started POST "/victims" for ::1 at 2019-10-16 12:17:07 -0400
+Processing by VictimsController#create as HTML
+  Parameters: {"authenticity_token"=>"2vL5AfkCkgE3QAdqJQXDGWUQMi3TipJWIUGhnigzaqenKwBzSqLWkX//prsnf4eQ5A/JS4IozdmL34+jnY01MA==", "victim"=>{"name"=>"", "living"=>"0", "speed"=>"", "monster_id"=>""}, "commit"=>"Create Victim"}
+Redirected to http://localhost:3000/victims/new
+Completed 302 Found in 4ms (ActiveRecord: 0.0ms | Allocations: 2039)
+
+
+Started GET "/victims/new" for ::1 at 2019-10-16 12:17:07 -0400
+Processing by VictimsController#new as HTML
+  Rendering victims/new.html.erb within layouts/application
+  [1m[36mMonster Load (0.1ms)[0m  [1m[34mSELECT "monsters".* FROM "monsters"[0m
+  ↳ app/views/victims/new.html.erb:22
+  Rendered victims/new.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1768)
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.1ms | Allocations: 7965)
+
+

@@ -1,0 +1,7 @@
+<%= link_to "All books", books_path %>
+
+
+<h2><%= @book.title %></h2>
+<h4>By: <%= @book.author %></h4>
+<strong>You have <%= 5-session[:views] %> more views left!</strong>
+<p><%= session[:views] >= 5 ? "" : @book.content %></p>

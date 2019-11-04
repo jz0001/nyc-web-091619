@@ -1,0 +1,10 @@
+<h1>🍵 All the Dranks ☕️</h1>
+
+<ul>
+<% @drinks.each do |drink| %>
+    <li><strong>Name:</strong> <%= link_to drink.name, drink_path(drink) %></li>
+    <li><strong>Iced?</strong> <%= drink.iced %></li>
+    <li><strong>Price:</strong> <%= drink.price %></li>
+    <hr>
+<% end%>
+</ul>

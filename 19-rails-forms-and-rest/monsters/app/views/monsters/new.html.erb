@@ -1,0 +1,10 @@
+<h1>🧟‍♀️ Create a New Monster 🧟‍♂️</h1>
+
+
+<%= form_with model: @monster do |form| %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :scariness %>
+  <%= form.number_field :scariness %>
+  <%= form.submit %>
+<% end%>

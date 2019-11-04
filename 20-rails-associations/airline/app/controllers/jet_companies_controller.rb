@@ -1,0 +1,2 @@
+class JetCompaniesController < ApplicationController
+end

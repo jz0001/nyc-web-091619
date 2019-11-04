@@ -1,0 +1,5 @@
+<ul>
+  <% @donuts.each do |donut| %>
+    <li>Name: <%= donut.name %>, Tastiness:<%= donut.tastiness%>, Price: $<%= donut.price %>  </li>
+  <% end%>
+</ul>

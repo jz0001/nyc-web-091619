@@ -1,0 +1,26 @@
+img {
+  width: 30vw;
+}
+
+#nc {
+  width: 60vw;
+  position: absolute;
+  top: 30px;
+  left: 20%;
+  animation: spiral-in 2s;
+}
+
+a {
+  transition: color 4s;
+}
+
+a:hover {
+  color: black;
+  cursor: cell;
+}
+
+@keyframes spiral-in {
+  0% {left: -100%; transform: rotateY(0deg); filter: invert(0);}
+  50% {left: 100%; transform: rotateY(360deg); filter: invert(0.5)}
+  100% {left: 20%; transform: rotateY(720deg); filter: invert(1)}
+}

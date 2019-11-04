@@ -1,0 +1,7 @@
+Rails.application.routes.draw do
+  resources :drinks 
+
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get '/drinks/:id/ingredients', to: 'drinks#ingredients', as: 'drink_ingredients'
+end

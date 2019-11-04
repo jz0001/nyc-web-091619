@@ -1,0 +1,23 @@
+<% if flash[:errors] %>
+<ul>
+  <% flash[:errors].each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_for @drink do |f| %>
+<%= f.label :name %>
+<%= f.text_field :name %>
+<br>
+<%= f.label :iced %>
+<%= f.check_box :iced %>
+<br>
+<%= f.label :price %>
+<%= f.number_field :price %>
+<br>
+<%= f.label :ingredients %>
+<%= f.text_area :ingredients %>
+<br>
+<%= f.submit %>
+<% end%>

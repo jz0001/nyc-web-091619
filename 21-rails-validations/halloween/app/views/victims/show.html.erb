@@ -1,0 +1,7 @@
+You're on the victim show page
+
+<% if flash[:notice]%>
+  <% flash[:notice].each do |notice|%>
+    <p><%= notice %></p>
+  <% end%>
+<% end%>

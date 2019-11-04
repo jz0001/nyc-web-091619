@@ -1,0 +1,4 @@
+<h1><%= @monster.name %></h1>
+ <h2>Scariness: <%= @monster.scariness %></h2>
+
+ <%= button_to "Delete Monster", { action: "destroy", id: @monster.id }, method: :delete, data: { confirm: "Are you sure?" } %>

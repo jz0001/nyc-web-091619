@@ -1,0 +1,9 @@
+<h1>🐩 Welcome to da club, <%= @user.username %>!!! 🎶</h1>
+
+<% if flash[:errors]%>
+  <% flash[:errors].each do |message| %>
+    <strong><%= message %></strong>
+  <% end%>
+<% end%>
+
+<h3>User Id: <%= session[:user_id] %></h3>
