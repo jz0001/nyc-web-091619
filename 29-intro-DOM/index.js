@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function(){
     </div>'
     form.hidden = true
     rapperUl.parentNode.insertBefore(form, addButton)
-
+    
     function appendCeleb(obj){
         let li = document.createElement("li")
         li.innerHTML = `<h3>${obj.name}</h3>\
@@ -68,8 +68,10 @@ document.addEventListener("DOMContentLoaded", function(){
             span.innerText = score
         } else if (e.target.id === "delete-button"){
             liNode.remove()
-        } else if (e.target === h3)
-        
+        } else if (e.target.tagName === "H3"){
+            
+        }
+    
     })
 
 
