@@ -1,5 +1,15 @@
 document.addEventListener("DOMContentLoaded", function(){
     
+    let api = "http://localhost:3000/celebrities"
+
+    let fetchCall = function(){
+        fetch(api)
+        .then(function(resp){return resp.json()})
+        .then(function(data){data.forEach(appendCeleb)})
+    }
+    fetchCall();
+
+
     let rapperUl = document.getElementById("rappers")
     let addButton = document.createElement("button")
     addButton.innerText = "Add New Celeb"
@@ -45,18 +55,24 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 
     rapperUl.addEventListener("click", function(e){
+        let liNode = e.target.parentNode
         if (e.target.id === "up-button") {
-            let liNode = e.target.parentNode
             let span = liNode.children[1].firstElementChild
             let score = parseInt(span.innerText)
             score++
             span.innerText = score
-            console.log(span)
         } else if (e.target.id === "down-button"){
-            console.log("downing")
+            let span = liNode.children[1].firstElementChild
+            let score = parseInt(span.innerText)
+            score--
+            span.innerText = score
         } else if (e.target.id === "delete-button"){
-            console.log("xxx")
-        }
+            liNode.remove()
+        } else if (e.target === h3)
+        
     })
+
+
+
 
 }) //end of DOM Content Loaded Listener
