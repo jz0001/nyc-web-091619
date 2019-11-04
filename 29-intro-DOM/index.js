@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", function(){
                         <img alt="Drake is no rapper" class="rapper"
             src="${obj.image}" />
         <button id = "up-button">Up Vote 😘😍😘</button>
-        <button id = "down-button">Down Vote 🖕🤮🖕</button>`
+        <button id = "down-button">Down Vote 🖕🤮🖕</button>
+        <button id = "delete-button">XXX 🔞</button>`
         rapperUl.appendChild(li)
     }
 
@@ -33,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function(){
         addButton.hidden = true
         form.addEventListener("submit", function(subEvent){
             subEvent.preventDefault()
+            // console.log(subEvent)
             let name = subEvent.target[0].value
             let image = subEvent.target[1].value
             let newCeleb = {name: name, image: image}
@@ -42,5 +44,19 @@ document.addEventListener("DOMContentLoaded", function(){
         })
     })
 
+    rapperUl.addEventListener("click", function(e){
+        if (e.target.id === "up-button") {
+            let liNode = e.target.parentNode
+            let span = liNode.children[1].firstElementChild
+            let score = parseInt(span.innerText)
+            score++
+            span.innerText = score
+            console.log(span)
+        } else if (e.target.id === "down-button"){
+            console.log("downing")
+        } else if (e.target.id === "delete-button"){
+            console.log("xxx")
+        }
+    })
 
 }) //end of DOM Content Loaded Listener
