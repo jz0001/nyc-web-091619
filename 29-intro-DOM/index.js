@@ -69,7 +69,11 @@ document.addEventListener("DOMContentLoaded", function(){
         } else if (e.target.id === "delete-button"){
             liNode.remove()
         } else if (e.target.tagName === "H3"){
-            
+            let h3form = document.createElement("input"); //create an input
+            h3form.setAttribute('type', 'text');//input type = type, value of input type is text
+            h3form.setAttribute('value', 'Enter new name');
+            e.target.parentNode.replaceChild(h3form, e.target) //use the form to swap the name
+            //need to create changeHandler
         }
     
     })
